@@ -1,9 +1,31 @@
-import { Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, Inbox, Settings, TrendingUp } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { LayoutDashboard, Inbox, Settings, TrendingUp, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const Navigation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      navigate("/auth");
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out.",
+      });
+    }
+  };
 
   const navItems = [
     { path: "/", icon: TrendingUp, label: "Home" },
@@ -25,7 +47,7 @@ const Navigation = () => {
             </span>
           </Link>
 
-          <div className="flex gap-1">
+          <div className="flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               const Icon = item.icon;
@@ -45,6 +67,15 @@ const Navigation = () => {
                 </Link>
               );
             })}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="flex items-center gap-2 ml-2"
+            >
+              <LogOut className="w-4 h-4" />
+              Logout
+            </Button>
           </div>
         </div>
       </div>

@@ -31,15 +31,15 @@ const Index = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/dashboard">
+              <Link to="/auth">
                 <Button variant="gradient" size="lg" className="text-lg px-8">
-                  View Dashboard
+                  Start Free Trial
                   <TrendingUp className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
-              <Link to="/settings">
+              <Link to="/auth">
                 <Button variant="outline" size="lg" className="text-lg px-8">
-                  Connect Sources
+                  Log In
                 </Button>
               </Link>
             </div>
