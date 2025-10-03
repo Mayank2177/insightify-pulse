@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     host: '0.0.0.0',
     port: 5000,
     allowedHosts: [
-      "b7e86e66-fc85-4e3b-95de-77460b9dd5d3-00-3jlvvcuq7h69q.sisko.replit.dev",
+      "4a2d85c2-2228-47ac-823d-1d39470f50c2-00-tkq9ely2gva5.picard.replit.dev",
     ],
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
